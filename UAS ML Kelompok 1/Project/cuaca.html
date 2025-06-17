@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prakiraan Cuaca dan Voltase Panel Surya - IV Jurai</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      transition: background 0.5s ease;
+    }
+
+    header {
+      background: rgba(255, 255, 255, 0.85);
+      padding: 20px;
+      text-align: center;
+      border-bottom: 2px solid #cfd9e6;
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo {
+      position: absolute; top: 10px; left: 10px;
+      width: 50px;
+    }
+
+    .theme-selector {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    .current-weather {
+      background: rgba(255, 255, 255, 0.6);
+      padding: 20px;
+      text-align: center;
+      border-bottom: 2px solid #cfd9e6;
+    }
+
+    .forecast-container {
+      position: relative;
+      overflow: hidden;
+      flex: 1;
+      padding: 20px 0;
+    }
+
+    .track {
+      display: flex;
+      gap: 20px;
+      animation: scroll 60s linear infinite;
+    }
+
+    @keyframes scroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .forecast-card {
+      width: 500px; /* Lebar 9:16 ratio */
+      height: 400px; /* Tinggi 9:16 ratio */
+      background: #fff;
+      border: 1px solid #cde3f4;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: left;
+      padding: 20px;
+      margin: 10px;
+      transition: all 0.3s ease-in-out; /* Menambahkan transisi animasi */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .forecast-card:hover {
+      transform: scale(1.05); /* Membesarkan sedikit saat hover */
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Menambahkan bayangan yang lebih besar */
+      cursor: pointer; /* Menambahkan pointer saat hover */
+    }
+
+    .forecast-card img {
+      display: block;
+      margin: 0 auto 10px;
+      width: 60px; height: 60px;
+    }
+
+    .forecast-card h3 {
+      font-size: 18px; color: #333; text-align: center; margin-bottom: 12px;
+    }
+
+    .forecast-card p {
+      font-size: 14px; color: #444; margin: 6px 0;
+    }
+
+    .forecast-card p span {
+      font-weight: bold;
+    }
+
+    footer {
+      background: rgba(255, 255, 255, 0.6);
+      padding: 10px;
+      text-align: center;
+      color: #333;
+    }
+
+    /* Tema siang dengan gradasi */
+    .siang-theme {
+      background: linear-gradient(to bottom right, #aee2ff, #ffd29e);
+    }
+
+    .pagi-theme {
+      background-color: #d0e8ff;
+    }
+
+    .sore-theme {
+      background-color: #ffd1a4;
+    }
+
+    .malam-theme {
+      background-color: #1e1e2f;
+      color: #f0f0f0;
+    }
+
+    .malam-theme h1,
+    .malam-theme h2,
+    .malam-theme h3,
+    .malam-theme p,
+    .malam-theme span,
+    .malam-theme label,
+    .malam-theme select,
+    .malam-theme option {
+      color: #f0f0f0;
+    }
+
+    .malam-theme .forecast-card {
+      background-color: #2b2b3d;
+      border-color: #444;
+      color: #f0f0f0;
+    }
+
+    .malam-theme footer,
+    .malam-theme .current-weather,
+    .malam-theme header {
+      background: rgba(255, 255, 255, 0.05);
+      color: #f0f0f0;
+    }
+
+    .malam-theme select {
+      background-color: #333;
+      border: 1px solid #888;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://unp.ac.id/patch/images/800/88c55c3c3da3b19e7b7939feedaceb35.png"
+         class="logo" alt="Logo UNP">
+    <h1>Prakiraan Cuaca dan Voltase Panel Surya</h1>
+    <p>Kecamatan IV Jurai, Sumatera Barat</p>
+
+    <div class="theme-selector">
+      <label for="theme">Tema: </label>
+      <select id="theme" onchange="handleThemeChange()">
+        <option value="auto">Otomatis</option>
+        <option value="pagi">Pagi</option>
+        <option value="siang">Siang</option>
+        <option value="sore">Sore</option>
+        <option value="malam">Malam</option>
+      </select>
+    </div>
+  </header>
+
+  <section class="current-weather">
+    <h2>Data Cuaca & Voltase Panel Surya</h2>
+  </section>
+
+  <div class="forecast-container">
+    <div class="track" id="track">
+      <!-- Kartu cuaca akan diisi oleh JS -->
+    </div>
+  </div>
+
+  <footer>
+    &copy; kelompok 1 UAS Machine Learning UNP - Data by BMKG
+  </footer>
+
+  <script>
+    let manualTheme = "auto";
+
+    function parseCSV(text) {
+      const lines = text.trim().split('\n');
+      const headers = lines.shift().split(',');
+      return lines.map(line => {
+        const cols = line.split(',');
+        return headers.reduce((obj, h, i) => {
+          obj[h] = cols[i];
+          return obj;
+        }, {});
+      });
+    }
+
+    function applyTheme(theme) {
+      document.body.className = ''; // reset semua class
+
+      if (theme === 'pagi') document.body.classList.add('pagi-theme');
+      else if (theme === 'siang') document.body.classList.add('siang-theme');
+      else if (theme === 'sore') document.body.classList.add('sore-theme');
+      else if (theme === 'malam') document.body.classList.add('malam-theme');
+      else {
+        const hour = new Date().getHours();
+        if (hour >= 6 && hour < 12) document.body.classList.add('pagi-theme');
+        else if (hour >= 12 && hour < 15) document.body.classList.add('siang-theme');
+        else if (hour >= 15 && hour < 18) document.body.classList.add('sore-theme');
+        else document.body.classList.add('malam-theme');
+      }
+    }
+
+    function handleThemeChange() {
+      const selected = document.getElementById("theme").value;
+      manualTheme = selected;
+      applyTheme(manualTheme);
+    }
+
+    function updateThemePeriodically() {
+      if (manualTheme === "auto") {
+        applyTheme("auto");
+      }
+    }
+
+    function loadCSVData() {
+      fetch('hasil_prediksi_tegangan.csv')
+        .then(r => r.text())
+        .then(txt => {
+          const data = parseCSV(txt);
+          const cards = data.map(d => `
+            <div class="forecast-card">
+              <img src="${d.image}" alt="">
+              <h3>${d.local_datetime}</h3>
+              <p><span>Suhu:</span> ${d.t}°C</p>
+              <p><span>Cuaca:</span> ${d.weather_desc}</p>
+              <p><span>Kelembapan:</span> ${d.hu}%</p>
+              <p><span>Kecep. Angin:</span> ${d.ws} km/jam ${d.wd}</p>
+              <p><span>Voltase:</span> ${parseFloat(d.voltage).toFixed(3)} V</p>
+            </div>
+          `).join('');
+          document.getElementById("track").innerHTML = cards + cards;
+        })
+        .catch(err => console.error("Gagal muat CSV:", err));
+    }
+
+    // Inisialisasi
+    loadCSVData();
+    applyTheme(manualTheme);
+
+    // Update tiap menit
+    setInterval(() => {
+      loadCSVData();
+      updateThemePeriodically();
+    }, 60000);
+  </script>
+</body>
+</html>

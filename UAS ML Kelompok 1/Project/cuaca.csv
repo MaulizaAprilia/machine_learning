@@ -1,0 +1,22 @@
+datetime,local_datetime,t,tcc,tp,weather_desc,wd,wd_deg,ws,hu,vs,vs_text,image
+2025-05-07T03:00:00Z,2025-05-07 10:00:00,29,81,0,Cerah Berawan,SW,264,4.1,71,36918,> 10 km,https://api-apps.bmkg.go.id/storage/icon/cuaca/cerah berawan-am.svg
+2025-05-07T06:00:00Z,2025-05-07 13:00:00,29,49,0,Cerah,SW,238,7,74,33017,> 10 km,https://api-apps.bmkg.go.id/storage/icon/cuaca/cerah-am.svg
+2025-05-07T09:00:00Z,2025-05-07 16:00:00,28,62,0,Cerah Berawan,SW,238,3.5,79,37296,> 10 km,https://api-apps.bmkg.go.id/storage/icon/cuaca/cerah berawan-am.svg
+2025-05-07T12:00:00Z,2025-05-07 19:00:00,26,99,0,Berawan,NE,80,1.9,86,27099,> 10 km,https://api-apps.bmkg.go.id/storage/icon/cuaca/berawan-pm.svg
+2025-05-07T15:00:00Z,2025-05-07 22:00:00,23,55,0,Cerah,NE,58,3.4,85,19158,> 10 km,https://api-apps.bmkg.go.id/storage/icon/cuaca/cerah-pm.svg
+2025-05-07T18:00:00Z,2025-05-08 01:00:00,22,98,0.1,Udara Kabur,NE,63,6.4,81,1668,< 2 km,https://api-apps.bmkg.go.id/storage/icon/cuaca/udara kabur.svg
+2025-05-07T21:00:00Z,2025-05-08 04:00:00,22,79,0,Udara Kabur,NE,56,5.2,78,1817,< 2 km,https://api-apps.bmkg.go.id/storage/icon/cuaca/udara kabur.svg
+2025-05-08T00:00:00Z,2025-05-08 07:00:00,26,40,0,Cerah,NE,65,2.9,74,9987,< 10 km,https://api-apps.bmkg.go.id/storage/icon/cuaca/cerah-am.svg
+2025-05-08T03:00:00Z,2025-05-08 10:00:00,29,38,0,Cerah,SW,242,4.4,73,33957,> 10 km,https://api-apps.bmkg.go.id/storage/icon/cuaca/cerah-am.svg
+2025-05-08T06:00:00Z,2025-05-08 13:00:00,28,53,0.1,Cerah,SW,267,4.7,79,31701,> 10 km,https://api-apps.bmkg.go.id/storage/icon/cuaca/cerah-am.svg
+2025-05-08T09:00:00Z,2025-05-08 16:00:00,27,100,0.3,Berawan,SW,269,5.3,84,20794,> 10 km,https://api-apps.bmkg.go.id/storage/icon/cuaca/berawan-am.svg
+2025-05-08T12:00:00Z,2025-05-08 19:00:00,24,61,0,Cerah Berawan,NE,55,4.7,94,9320,< 10 km,https://api-apps.bmkg.go.id/storage/icon/cuaca/cerah berawan-pm.svg
+2025-05-08T15:00:00Z,2025-05-08 22:00:00,23,95,0,Berawan,NE,66,5,91,18795,> 10 km,https://api-apps.bmkg.go.id/storage/icon/cuaca/berawan-pm.svg
+2025-05-08T18:00:00Z,2025-05-09 01:00:00,22,99,0.1,Udara Kabur,NE,67,2.9,90,2292,< 3 km,https://api-apps.bmkg.go.id/storage/icon/cuaca/udara kabur.svg
+2025-05-08T21:00:00Z,2025-05-09 04:00:00,22,95,0,Berawan,NE,70,4.2,90,14520,> 10 km,https://api-apps.bmkg.go.id/storage/icon/cuaca/berawan-pm.svg
+2025-05-09T00:00:00Z,2025-05-09 07:00:00,26,86,0,Cerah Berawan,NE,69,3,80,9999,< 10 km,https://api-apps.bmkg.go.id/storage/icon/cuaca/cerah berawan-am.svg
+2025-05-09T03:00:00Z,2025-05-09 10:00:00,29,65,0,Cerah Berawan,SW,242,4.6,74,9998,< 10 km,https://api-apps.bmkg.go.id/storage/icon/cuaca/cerah berawan-am.svg
+2025-05-09T06:00:00Z,2025-05-09 13:00:00,27,57,0.2,Cerah,SW,242,4.6,83,9998,< 10 km,https://api-apps.bmkg.go.id/storage/icon/cuaca/cerah-am.svg
+2025-05-09T09:00:00Z,2025-05-09 16:00:00,27,82,0.2,Cerah Berawan,NE,69,4.4,84,9510,< 10 km,https://api-apps.bmkg.go.id/storage/icon/cuaca/cerah berawan-am.svg
+2025-05-09T12:00:00Z,2025-05-09 19:00:00,25,100,0,Berawan,NE,69,4.4,90,9510,< 10 km,https://api-apps.bmkg.go.id/storage/icon/cuaca/berawan-pm.svg
+2025-05-09T15:00:00Z,2025-05-09 22:00:00,23,100,0,Berawan,NE,67,1.9,89,8949,< 9 km,https://api-apps.bmkg.go.id/storage/icon/cuaca/berawan-pm.svg
